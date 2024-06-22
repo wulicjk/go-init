@@ -6,12 +6,12 @@
     rTimeout =  2000     #ms
 
 [mysql_db]
-    #db_name      =  "read_later"     #数据库名称
-    #host         =  "localhost"       #Host
-    #port         =  3306                  #端口
-    #user         =  "root"     #用户名
-    #passwd       =  "root123456"    #密码
-    #table_prefix = ""
+    db_name      =  "read_later"     #数据库名称
+    host         =  "localhost"       #Host
+    port         =  3306                  #端口
+    user         =  "root"     #用户名
+    passwd       =  "root123456"    #密码
+    table_prefix = ""
 
 
 
