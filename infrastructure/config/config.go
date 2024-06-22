@@ -32,10 +32,8 @@ func init() {
 	case "dev":
 		confPath = filepath.Join(confDirPath, "dev-config.toml")
 	case "prod":
-
 		confPath = filepath.Join(confDirPath, "prod-config.toml")
 	default:
-
 		confPath = filepath.Join(confDirPath, "dev-config.toml")
 	}
 
@@ -44,7 +42,6 @@ func init() {
 		log.Fatalf("InitConfig err: %v", err)
 		return
 	}
-	log.Info(Cfg)
 	log.Infof("Loaded config from: %s", confPath)
 }
 
