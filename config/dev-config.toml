@@ -1,0 +1,28 @@
+[http_server]
+    enable   =  true
+    gport    =  9183     #业务端口
+    mport    =  8085     #监控端口
+    wTimeout =  2000     #ms
+    rTimeout =  2000     #ms
+
+[mysql_db]
+    #db_name      =  "read_later"     #数据库名称
+    #host         =  "localhost"       #Host
+    #port         =  3306                  #端口
+    #user         =  "root"     #用户名
+    #passwd       =  "root123456"    #密码
+    #table_prefix = ""
+
+
+
+[redis_db]
+    read_addr     =  ""
+    write_addr    =  ""
+    db = 1
+    passwd        =  ""
+    max_idel      =  10
+    max_active    =  20
+    idle_timeout  =  50
+    conn_timeout  =  1000
+    write_timeout =  1000
+    read_timeout  =  1000
