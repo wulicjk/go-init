@@ -2,9 +2,12 @@ package config
 
 import (
 	"flag"
+	"fmt"
 	"github.com/BurntSushi/toml"
 	log "github.com/sirupsen/logrus"
+	"os"
 	"path/filepath"
+	"strings"
 )
 
 var Cfg Config
@@ -16,13 +19,24 @@ func init() {
 
 	// 根据环境变量选择配置文件路径
 	var confPath string
+	currentDir, err := os.Getwd()
+	if err != nil {
+		fmt.Println("Error getting currentDir path:", err)
+		return
+	}
+	rootPath := getProjectRootPath(currentDir)
+	confDirPath := filepath.Join(rootPath, "config")
+
+	fmt.Println("Current working directory:", confDirPath)
 	switch *envFlag {
 	case "dev":
-		confPath = filepath.Join("../conf", "dev-config.toml")
+		confPath = filepath.Join(confDirPath, "dev-config.toml")
 	case "prod":
-		confPath = filepath.Join("../conf", "prod-config.toml")
+
+		confPath = filepath.Join(confDirPath, "prod-config.toml")
 	default:
-		confPath = filepath.Join("../conf", "dev-config.toml")
+
+		confPath = filepath.Join(confDirPath, "dev-config.toml")
 	}
 
 	// 加载配置文件
@@ -30,7 +44,21 @@ func init() {
 		log.Fatalf("InitConfig err: %v", err)
 		return
 	}
+	log.Info(Cfg)
 	log.Infof("Loaded config from: %s", confPath)
+}
+
+func getProjectRootPath(path string) string {
+	// 找到 "readLater-backend" 字符串的结束位置
+	index := strings.Index(path, "readLater-backend")
+	if index == -1 {
+		// 如果没有找到，直接返回原始路径
+		return path
+	}
+
+	// 从头部开始截取到 "readLater-backend" 之后的部分
+	endIndex := index + len("readLater-backend")
+	return path[:endIndex]
 }
 
 type Config struct {
